@@ -4,3 +4,139 @@
 *:after {
   box-sizing: border-box;
 }
+
+
+
+:root {
+  --primary-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --secondary-font: 'Arial';
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #757577;
+  padding: 20px;
+}
+
+.siteName a {
+  font-family: var(--primary-font);
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+#tools a {
+  font-family: var(--primary-font);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+nav ul {
+  font-family: var(--primary-font);
+  color: #fff;
+  background-color: #000;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: block;
+  padding: 10px 10px;
+}
+
+/* nav ul li a {
+} */
+
+
+h1 {
+  font-family: var(--primary-font);
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 10px;
+  left: 10px;
+  padding: 20px;
+  width: 200px;
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+h2 {
+  margin: auto;
+}
+
+.vehicle-features {
+  list-style: none;
+  padding: 0;
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+.vehicle-features li {
+  text-align: left;
+  padding: 1px;
+}
+
+.reviews ul li {
+  padding: 5px;
+}
+
+.upgrades-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.upgrade-item {
+  text-align: center;
+  /* background-color: #e0e0e0;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  max-width: 180px;
+  height: 100px; */
+}
+
+.upgrade-box {
+  background-color: #e0e0e0;
+  border-radius: .5rem;
+  padding: .75rem;
+  /* width: 100%; */
+  /* max-width: 150px; */
+  height: 100px;
+}
+
+/* .upgrade-box img {} */
+
+.upgrade-item img {
+  height: auto;
+  align-items: center;
+}
+
+.upgrade-item p {
+  margin: 0;
+}
+
+footer p {
+  font-family: var(--primary-font);
+}
