@@ -5,23 +5,19 @@
   box-sizing: border-box;
 }
 
-
-
-:root {
-  --primary-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  --secondary-font: 'Arial';
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #757577;
+  background-color: #fff;
   padding: 20px;
 }
 
 .siteName a {
-  font-family: var(--primary-font);
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
@@ -29,33 +25,23 @@
 }
 
 #tools a {
-  font-family: var(--primary-font);
   text-transform: uppercase;
   text-decoration: none;
 }
 
 nav ul {
-  font-family: var(--primary-font);
   color: #fff;
   background-color: #000;
   list-style: none;
   display: flex;
   justify-content: space-around;
   margin: 0;
-  padding: 0;
+  padding: 5px;
 }
 
 nav ul li {
   display: block;
   padding: 10px 10px;
-}
-
-/* nav ul li a {
-} */
-
-
-h1 {
-  font-family: var(--primary-font);
 }
 
 .hero {
@@ -72,17 +58,31 @@ h1 {
 
 .hero-overlay {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
-  top: 10px;
-  left: 10px;
-  padding: 20px;
-  width: 200px;
-  max-width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  top: 2%;
+  left: 2%;
+  right: 2%;
+  padding: 2%;
+  width: auto;
+  max-width: 210px;
   border-radius: 5px;
 }
 
+.own-today-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0DB6D7;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 2px;
+  text-align: center;
+}
+
 h2 {
+  font-weight: 700;
   margin: auto;
+  color: #0DB6D7;
 }
 
 .vehicle-features {
@@ -93,12 +93,20 @@ h2 {
 }
 
 .vehicle-features li {
+  font-weight: 600;
+  color: #0DB6D7;
   text-align: left;
   padding: 1px;
 }
 
 .reviews ul li {
   padding: 5px;
+}
+
+.reviews-upgrades-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .upgrades-layout {
@@ -109,34 +117,53 @@ h2 {
 
 .upgrade-item {
   text-align: center;
-  /* background-color: #e0e0e0;
-  border-radius: 5px;
-  width: 100%;
-  text-align: center;
-  max-width: 180px;
-  height: 100px; */
 }
 
 .upgrade-box {
-  background-color: #e0e0e0;
-  border-radius: .5rem;
+  background-color: #0DB6D7;
+  border-radius: 5px;
   padding: .75rem;
-  /* width: 100%; */
-  /* max-width: 150px; */
   height: 100px;
 }
 
-/* .upgrade-box img {} */
-
 .upgrade-item img {
   height: auto;
-  align-items: center;
 }
 
 .upgrade-item p {
+  font-weight: 600;
   margin: 0;
 }
 
-footer p {
-  font-family: var(--primary-font);
+
+@media screen and (min-width: 640px) {
+  body {
+    background: url('/images/site/small_check.jpg');
+    background-size: cover;
+  }
+
+  #wrapper {
+    max-width: 960px;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 5px solid #0DB6D7;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .reviews-section {
+    order: 1;
+    flex: 0 0 48%;
+  }
+
+  .upgrades-section {
+    order: 0;
+    flex: 0 0 48%;
+  }
+
+  .reviews-upgrades-container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+  }
 }
