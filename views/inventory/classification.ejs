@@ -1,0 +1,14 @@
+<!-- Content Heading -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { %>
+        <%- include('../partials/redirect') %>
+            <% } %>
+
+                <!-- Message Block -->
+                <%# messages() %>
+
+                    <!-- Inventory Items Display -->
+                    <%- grid %>
