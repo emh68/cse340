@@ -24,6 +24,14 @@ Util.getNav = async function (req, res, next) {
     return list
 }
 
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
 module.exports = Util
 
 
@@ -58,4 +66,34 @@ Util.buildClassificationGrid = async function (data) {
         grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
     }
     return grid
+}
+
+/**********************************
+ * Build the details view HTML
+ **********************************/
+Util.buildDetailView = async function (vehicleData) {
+    const formattedPrice = Number(vehicleData.inv_price).toLocaleString("en-US", {
+        style: "currency", currency: "USD",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    })
+    const formattedMiles = Number(vehicleData.inv_miles).toLocaleString()
+
+    return `
+  <section class="vehicle-detail-container">
+    <div class="vehicle-image">
+      <img src="${vehicleData.inv_image}" alt="Image of ${vehicleData.inv_make} ${vehicleData.inv_model}">
+    </div>
+    <div class="vehicle-info">
+      <h1>${vehicleData.inv_year} ${vehicleData.inv_make} ${vehicleData.inv_model}</h1>
+      <ul>
+        <li><strong>Price:</strong> <span class="vehicle-price">${formattedPrice}</span></li>
+        <li><strong>Mileage:</strong> ${formattedMiles} miles</li>
+        <li><strong>Color:</strong> ${vehicleData.inv_color}</li>
+        <li><strong>Classification:</strong> ${vehicleData.classification_name}</li>
+        <li><strong>Description:</strong> ${vehicleData.inv_description}</li>
+      </ul>
+    </div>
+  </section>
+  `
 }

@@ -25,9 +25,11 @@ app.set("layout", "./layouts/layout") // not at views root
  * Routes
  *************************/
 app.use(static)
-app.get("/", baseController.buildHome) //Index route
+app.get("/", utilities.handleErrors(baseController.buildHome)) //Index route
 app.use("/inv", inventoryRoute) // Inventory routes
 app.use(async (req, res, next) => { next({ status: 404, message: 'Oops! Sorry, but even Batmobiles have breakdowns.' }) }) // File Not Found Route - must be last route in list
+
+
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
@@ -35,12 +37,16 @@ app.use(async (req, res, next) => { next({ status: 404, message: 'Oops! Sorry, b
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  res.render("errors/error", {
-    title: err.status || 'Server Error',
-    message: err.message,
-    nav
+  let message
+  let title
+  if (err.status == 404) { title = '404 Not Found'; message = err.message; } else { title = '500 Server Error'; message = 'Oh no! There was a crash. Maybe try a different route?'; }
+  res.status(err.status || 500).render("errors/error", {
+    title: title,
+    message: message,
+    nav: nav
   })
 })
+
 
 /* ***********************
  * Local Server Information
