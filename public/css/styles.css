@@ -309,6 +309,85 @@ h2 {
 }
 
 
+/* Account Login and Account Register */
+.login-form,
+.register-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #001f41;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-form label,
+.register-form label {
+  color: #fff;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.login-form input,
+.register-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-form button,
+.register-form button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 1rem 0;
+}
+
+.login-form button:hover,
+.register-form .error-home-button:hover {
+  background-color: #0DB6D7;
+}
+
+.register-link,
+.login-link {
+  color: #fff;
+  text-align: center;
+}
+
+#pswdBtn {
+  border: 2px solid #000;
+  border-radius: 4px;
+  padding: 2px;
+  margin-top: 1em;
+  width: 7em;
+  text-align: center;
+}
+
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-password {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.toggle-password:hover {
+  background-color: #0DB6D7;
+}
+
 /* Media Queries */
 
 @media screen and (min-width: 640px) {
