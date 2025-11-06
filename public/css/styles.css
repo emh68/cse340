@@ -361,6 +361,16 @@ h2 {
   text-align: center;
 }
 
+.password-requirements {
+  font-size: 0.9em;
+  color: #555;
+  background-color: #f9f9f9;
+  border-left: 3px solid #007BFF;
+  padding: 0.5em 1em;
+  margin: 0.5em 0 1em;
+  border-radius: 4px;
+}
+
 #pswdBtn {
   border: 2px solid #000;
   border-radius: 4px;
