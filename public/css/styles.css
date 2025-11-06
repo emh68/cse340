@@ -363,9 +363,10 @@ h2 {
 
 .password-requirements {
   font-size: 0.9em;
-  color: #555;
+  font-weight: 700;
+  color: #fff;
   background-color: #f9f9f9;
-  border-left: 3px solid #007BFF;
+  /* border-left: 3px solid #007BFF; */
   padding: 0.5em 1em;
   margin: 0.5em 0 1em;
   border-radius: 4px;
