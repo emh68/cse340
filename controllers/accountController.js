@@ -10,6 +10,7 @@ async function buildLogin(req, res, next) {
     res.render("account/login", {
         title: "Login",
         nav,
+        errors: null
     })
 }
 
@@ -54,4 +55,54 @@ async function registerAccount(req, res) {
     }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount }
+/* ****************************************
+*  Process Login
+* *************************************** */
+async function accountLogin(req, res) {
+    let nav = await utilities.getNav()
+    const { account_email, account_password } = req.body
+
+    try {
+        const accountData = await accountModel.getAccountByEmail(account_email)
+        if (!accountData) {
+            req.flash("notice", "No account found with that email.")
+            return res.status(400).render("account/login", {
+                title: "Login",
+                nav,
+                errors: null,
+                account_email
+            })
+        }
+
+        const passwordMatch = await accountModel.checkPassword(account_password, accountData.account_password)
+        if (!passwordMatch) {
+            req.flash("notice", "Invalid password. Please try again.")
+            return res.status(400).render("account/login", {
+                title: "Login",
+                nav,
+                errors: null,
+                account_email
+            })
+        }
+
+        req.session.account = {
+            account_id: accountData.account_id,
+            account_firstname: accountData.account_firstname,
+            account_email: accountData.account_email
+        }
+        req.flash("notice", `Welcome back, ${accountData.account_firstname}!`)
+        res.redirect("/dashboard")
+
+    } catch (error) {
+        console.error(error)
+        req.flash("notice", "An unexpected error occurred. Please try again.")
+        res.status(500).render("account/login", {
+            title: "Login",
+            nav,
+            errors: null,
+            account_email
+        })
+    }
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin }
