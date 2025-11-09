@@ -8,27 +8,25 @@ const accountModel = require("../models/account-model")
 * ********************************* */
 validate.registrationRules = () => {
     return [
-        // firstname is required and must be string
+
         body("account_firstname")
             .trim()
             .escape()
             .notEmpty()
             .isLength({ min: 1 })
-            .withMessage("Please provide a first name."), // on error this message is sent.
+            .withMessage("Please provide a first name."),
 
-        // lastname is required and must be string
         body("account_lastname")
             .trim()
             .escape()
             .notEmpty()
             .isLength({ min: 2 })
-            .withMessage("Please provide a last name."), // on error this message is sent.
+            .withMessage("Please provide a last name."),
 
-        // valid email is required and cannot already exist in the database
         body("account_email")
             .trim()
             .isEmail()
-            .normalizeEmail() // refer to validator.js docs
+            .normalizeEmail()
             .withMessage("A valid email is required.")
             .custom(async (account_email) => {
                 const emailExists = await accountModel.checkExistingEmail(account_email)
@@ -37,7 +35,6 @@ validate.registrationRules = () => {
                 }
             }),
 
-        // password is required and must be strong password
         body("account_password")
             .trim()
             .notEmpty()
@@ -52,9 +49,9 @@ validate.registrationRules = () => {
     ]
 }
 
-/* ******************************
- * Check data and return errors or continue to registration
- * ***************************** */
+/* **************************
+ * Check Registration Data
+ * ************************* */
 validate.checkRegData = async (req, res, next) => {
     const { account_firstname, account_lastname, account_email } = req.body
     let errors = []
@@ -74,9 +71,9 @@ validate.checkRegData = async (req, res, next) => {
     next()
 }
 
-/* **********************************
+/* ******************************
  *  Login Data Validation Rules
- * ********************************* */
+ * ****************************** */
 validate.loginRules = () => {
     return [
         body("account_email")
@@ -94,9 +91,9 @@ validate.loginRules = () => {
     ]
 }
 
-/* ******************************
- * Check login data and return errors or continue
- * ***************************** */
+/* *****************
+ * Check Login Data
+ * ***************** */
 validate.checkLoginData = async (req, res, next) => {
     const { account_email } = req.body
     let errors = validationResult(req)
