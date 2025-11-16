@@ -115,4 +115,91 @@ async function checkInventoryData(req, res, next) {
     next();
 }
 
-module.exports = { classificationRules, checkClassificationData, inventoryRules, checkInventoryData };
+/*  *****************************
+*  Update Inventory Rules
+* ****************************** */
+function updateRules() {
+    return [
+        body('classification_id')
+            .isInt({ min: 1 })
+            .withMessage('Please select a valid classification.'),
+
+        body('inv_make')
+            .trim()
+            .isLength({ min: 1 })
+            .withMessage('Make is required.')
+            .matches(/^[A-Za-z ]+$/)
+            .withMessage('Make may only contain letters, numbers, and spaces.'),
+
+        body('inv_model')
+            .trim()
+            .isLength({ min: 1 })
+            .withMessage('Model is required.')
+            .matches(/^[A-Za-z0-9 ]+$/)
+            .withMessage('Model may only contain letters, numbers, and spaces.'),
+
+        body('inv_year')
+            .isInt({ min: 1900, max: new Date().getFullYear() + 1 })
+            .withMessage('Enter a valid year.'),
+
+        body('inv_description')
+            .trim()
+            .isLength({ min: 1 })
+            .withMessage('Description is required.'),
+
+        body('inv_image')
+            .trim()
+            .isLength({ min: 1 })
+            .withMessage('Image path is required.'),
+
+        body('inv_thumbnail')
+            .trim()
+            .isLength({ min: 1 })
+            .withMessage('Thumbnail path is required.'),
+
+        body('inv_price')
+            .isFloat({ min: 0 })
+            .withMessage('Price must be a positive number.'),
+
+        body('inv_miles')
+            .isInt({ min: 0 })
+            .withMessage('Miles must be a non-negative integer.'),
+
+        body('inv_color')
+            .trim()
+            .isLength({ min: 1 })
+            .withMessage('Color is required.')
+            .matches(/^[A-Za-z ]+$/)
+            .withMessage('Color may only contain letters and spaces.')
+    ];
+}
+
+
+/* ***********************************************************
+    * Check Update Data for edit/update process
+    * Redirects back to the edit-inventory view if errors exist
+    * *********************************************************** */
+async function checkUpdateData(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        let nav = '';
+        if (req.app.locals.nav) nav = req.app.locals.nav;
+
+        // Get the dropdown classification list again
+        const utilities = require(".");
+        const classificationList = await utilities.buildClassificationList(req.body.classification_id);
+        const itemName = `${req.body.inv_make} ${req.body.inv_model}`;
+        return res.status(400).render('inventory/edit-inventory', {
+            title: 'Edit' + itemName,
+            nav,
+            classificationList,
+            errors,
+            ...req.body
+        });
+    }
+    next();
+}
+
+
+
+module.exports = { classificationRules, checkClassificationData, inventoryRules, checkInventoryData, updateRules, checkUpdateData };

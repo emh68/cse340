@@ -18,4 +18,7 @@ router.post("/register", regValidate.registrationRules(), regValidate.checkRegDa
 // Process the login attempt
 router.post("/login", regValidate.loginRules(), regValidate.checkLoginData, utilities.handleErrors(accountController.accountLogin));
 
+// Account
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccount));
+
 module.exports = router;

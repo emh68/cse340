@@ -17,6 +17,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 /* ***********************
  * Middleware
@@ -56,6 +57,8 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome)) //Index route
 app.use("/inv", inventoryRoute) // Inventory routes
 app.use("/account", accountRoute) // Login route
+app.use(cookieParser()) // cookie parser
+app.use(utilities.checkJWTToken) //JWT check
 app.use(async (req, res, next) => { next({ status: 404, message: 'Oops! Sorry, but even Batmobiles have breakdowns.' }) }) // File Not Found Route - must be last route in list
 
 

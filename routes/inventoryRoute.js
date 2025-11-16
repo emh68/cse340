@@ -30,4 +30,19 @@ router.get("/add-inventory", utilities.handleErrors(invController.buildAddInvent
 // Handle Add Inventory form submission
 router.post("/add-inventory", invValidate.inventoryRules(), invValidate.checkInventoryData, utilities.handleErrors(invController.addInventory));
 
+// Route for management inventory selection
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// Route to display the edit form for an inventory item
+router.get("/edit/:invId", utilities.handleErrors(invController.editInventoryView));
+
+// Route to handle inventory update
+router.post("/update", invValidate.updateRules(), invValidate.checkUpdateData, utilities.handleErrors(invController.updateInventory));
+
+// Deliver the delete confirmation view
+router.get('/delete/:inv_id', invController.buildDeleteView);
+
+// Process the deletion
+router.post('/delete', invController.deleteInventoryItem);
+
 module.exports = router;

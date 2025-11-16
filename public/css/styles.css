@@ -360,8 +360,35 @@ h2 {
 
 .login-form button,
 .register-form button,
-.inventory-form button,
 .classification-form button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #abd4ff;
+  color: #001f41;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 1rem 0;
+}
+
+.inventory-form button:disabled {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #ccc;
+  color: #545454;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.7;
+  margin: 1rem 0;
+}
+
+.inventory-form button:enabled {
   width: 100%;
   padding: 0.75rem;
   background-color: #abd4ff;
@@ -435,6 +462,57 @@ h2 {
   width: 100%;
   height: 100px;
   padding: 8px;
+}
+
+.manage-inventory {
+  color: #000;
+}
+
+.select-classification {
+  margin: 0 auto;
+}
+
+#classification_id {
+  margin-top: 15px;
+  padding: 5px 7px;
+}
+
+/* Inventory Management Table */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 2rem 0;
+  font-size: 1rem;
+}
+
+#inventoryDisplay thead {
+  background-color: #001f41;
+  color: white;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Action links styling */
+#inventoryDisplay a {
+  text-decoration: none;
+  color: #0a0ef8;
+  font-weight: bold;
+}
+
+#inventoryDisplay a:hover {
+  text-decoration: underline;
+  color: #007c91;
+}
+
+/* Row hover effect */
+#inventoryDisplay tbody tr:hover {
+  background-color: #e0f7fa;
 }
 
 input.dirty:invalid,
