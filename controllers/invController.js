@@ -63,8 +63,6 @@ invCont.buildByInventoryId = async function (req, res, next) {
 invCont.buildManagement = async function (req, res, next) {
     try {
         const nav = await utilities.getNav()
-
-        // Create classification <select> list
         const classificationSelect = await utilities.buildClassificationList()
 
         res.render("./inventory/management", {
@@ -77,9 +75,9 @@ invCont.buildManagement = async function (req, res, next) {
     }
 }
 
-/* ***************************
+/* *****************************
  * Show Add Classification form
- * ************************** */
+ * ***************************** */
 invCont.buildAddClassification = async function (req, res, next) {
     try {
         const nav = await utilities.getNav()
@@ -163,9 +161,9 @@ invCont.buildAddInventoryView = async function (req, res, next) {
     }
 }
 
-/* ****************************************
+/* ************************
 *  Process Add Inventory
-* **************************************** */
+* ************************* */
 invCont.addInventory = async function (req, res, next) {
     try {
         const {
@@ -216,12 +214,14 @@ invCont.addInventory = async function (req, res, next) {
  *  Return Inventory by Classification As JSON
  * ************************** */
 invCont.getInventoryJSON = async (req, res, next) => {
-    const classification_id = parseInt(req.params.classification_id)
-    const invData = await invModel.getInventoryByClassificationId(classification_id)
-    if (invData[0].inv_id) {
-        return res.json(invData)
-    } else {
-        next(new Error("No data returned"))
+    try {
+        const classification_id = parseInt(req.params.classification_id)
+        const invData = await invModel.getInventoryByClassificationId(classification_id)
+
+        // Always return JSON, even if empty
+        return res.json(invData) // empty array if no vehicles
+    } catch (error) {
+        next(error)
     }
 }
 
@@ -321,7 +321,9 @@ invCont.updateInventory = async function (req, res, next) {
     }
 }
 
-// Build and deliver the delete confirmation view
+/* *************************************************
+ *  Build and deliver the delete confirmation view
+ * ************************************************* */
 invCont.buildDeleteView = async function (req, res, next) {
     try {
         const inv_id = parseInt(req.params.inv_id);

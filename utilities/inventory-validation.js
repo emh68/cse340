@@ -176,16 +176,16 @@ function updateRules() {
 
 
 /* ***********************************************************
-    * Check Update Data for edit/update process
-    * Redirects back to the edit-inventory view if errors exist
-    * *********************************************************** */
+*  Check Update Data for edit/update process
+*  Redirects back to the edit-inventory view if errors exist
+* *********************************************************** */
 async function checkUpdateData(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         let nav = '';
         if (req.app.locals.nav) nav = req.app.locals.nav;
 
-        // Get the dropdown classification list again
+        // Get the dropdown classification list
         const utilities = require(".");
         const classificationList = await utilities.buildClassificationList(req.body.classification_id);
         const itemName = `${req.body.inv_make} ${req.body.inv_model}`;

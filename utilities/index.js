@@ -126,16 +126,21 @@ Util.buildClassificationList = async function (classification_id = null) {
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
-    if (req.cookies.jwt) {
+    // default - not logged in
+    res.locals.loggedin = 0
+    res.locals.accountData = null
+
+    if (req.cookies && req.cookies.jwt) {
         jwt.verify(
             req.cookies.jwt,
             process.env.ACCESS_TOKEN_SECRET,
             function (err, accountData) {
                 if (err) {
-                    req.flash("Please log in")
+                    req.flash("notice", "Please log in")
                     res.clearCookie("jwt")
-                    return res.redirect("/account/login")
+                    return next()
                 }
+                // valid token and logged in
                 res.locals.accountData = accountData
                 res.locals.loggedin = 1
                 next()
@@ -144,6 +149,7 @@ Util.checkJWTToken = (req, res, next) => {
         next()
     }
 }
+
 
 /* ****************************************
  *  Check Login

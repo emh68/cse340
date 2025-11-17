@@ -220,6 +220,7 @@ h2 {
 /* Overlay that centers all content on the image */
 .error-overlay {
   position: absolute;
+  inset: 0;
   top: -10%;
   left: 0;
   width: 100%;
@@ -230,6 +231,7 @@ h2 {
   align-items: center;
   text-align: center;
   box-sizing: border-box;
+  pointer-events: none;
 }
 
 /* Text and button styles */
@@ -329,7 +331,9 @@ h2 {
 .login-form,
 .register-form,
 .inventory-form,
-.classification-form {
+.classification-form,
+.account-update-form,
+.change-account-password-form {
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
@@ -341,7 +345,9 @@ h2 {
 .login-form label,
 .register-form label,
 .inventory-form label,
-.classification-form label {
+.classification-form label,
+.account-update-form label,
+.change-account-password-form label {
   color: #fff;
   display: block;
   margin-bottom: 0.5rem;
@@ -350,7 +356,9 @@ h2 {
 .login-form input,
 .register-form input,
 .inventory-form input,
-.classification-form input {
+.classification-form input,
+.account-update-form input,
+.change-account-password-form input {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -360,7 +368,9 @@ h2 {
 
 .login-form button,
 .register-form button,
-.classification-form button {
+.classification-form button,
+.account-update-form button,
+.change-account-password-form button {
   width: 100%;
   padding: 0.75rem;
   background-color: #abd4ff;

@@ -42,7 +42,13 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
+app.use(cookieParser()) // cookie parser
+app.use((req, res, next) => { // default values for locals so views don't error
+  res.locals.loggedin = 0
+  res.locals.accountData = res.locals.accountData || null
+  next()
+})
+app.use(utilities.checkJWTToken) //JWT check
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -57,8 +63,6 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome)) //Index route
 app.use("/inv", inventoryRoute) // Inventory routes
 app.use("/account", accountRoute) // Login route
-app.use(cookieParser()) // cookie parser
-app.use(utilities.checkJWTToken) //JWT check
 app.use(async (req, res, next) => { next({ status: 404, message: 'Oops! Sorry, but even Batmobiles have breakdowns.' }) }) // File Not Found Route - must be last route in list
 
 

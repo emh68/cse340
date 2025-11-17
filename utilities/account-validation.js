@@ -110,4 +110,77 @@ validate.checkLoginData = async (req, res, next) => {
     next()
 }
 
+/* **************************************
+ * Update Account Validation Rules
+ * ************************************** */
+validate.updateAccountRules = () => {
+    return [
+        body("account_firstname")
+            .trim()
+            .escape()
+            .notEmpty()
+            .withMessage("First name is required."),
+        body("account_lastname")
+            .trim()
+            .escape()
+            .notEmpty()
+            .withMessage("Last name is required."),
+        body("account_email")
+            .trim()
+            .normalizeEmail()
+            .isEmail()
+            .withMessage("A valid email is required."),
+    ]
+}
+
+validate.checkUpdateData = async (req, res, next) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        return res.render("account/update-account", {
+            title: "Edit Account",
+            nav,
+            accountData: req.body,
+            errors: errors.array(),
+        })
+    }
+    next()
+}
+
+/* **************************************
+ * Password Validation Rules
+ * ************************************** */
+validate.passwordRules = () => {
+    return [
+        body("account_password")
+            .trim()
+            .notEmpty()
+            .isStrongPassword({
+                minLength: 12,
+                minLowercase: 1,
+                minUppercase: 1,
+                minNumbers: 1,
+                minSymbols: 1,
+            })
+            .withMessage(
+                "Password must be at least 12 characters and include uppercase, lowercase, number, and symbol."
+            ),
+    ]
+}
+
+validate.checkPasswordData = async (req, res, next) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        return res.render("account/update-account", {
+            title: "Edit Account",
+            nav,
+            accountData: req.body,
+            errors: errors.array(),
+        })
+    }
+    next()
+}
+
+
 module.exports = validate
