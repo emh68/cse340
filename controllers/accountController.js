@@ -189,7 +189,7 @@ async function updateAccount(req, res, next) {
         const { account_id, account_firstname, account_lastname, account_email } = req.body;
         const nav = await utilities.getNav();
 
-        // Check if the email is already used by another account
+        // Check if the email is already in use
         const existingAccount = await accountModel.getAccountByEmail(account_email);
         if (existingAccount && existingAccount.account_id != account_id) {
             return res.render("account/update-account", {
@@ -200,7 +200,6 @@ async function updateAccount(req, res, next) {
             });
         }
 
-        // Update the account
         const result = await accountModel.updateAccount({ account_id, account_firstname, account_lastname, account_email });
 
         if (!result) {
@@ -209,7 +208,6 @@ async function updateAccount(req, res, next) {
             req.flash("success", "Account information updated successfully.");
         }
 
-        // Re-query updated account info
         const accountData = await accountModel.getAccountById(account_id) || {};
 
         res.render("account/update-account", {
@@ -244,7 +242,6 @@ async function changePassword(req, res, next) {
             req.flash("success", "Password changed successfully.");
         }
 
-        // Re-query account info for display
         const accountData = await accountModel.getAccountById(account_id) || {};
 
         res.render("account/update-account", {

@@ -25,10 +25,13 @@ router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.b
 // Process logout
 router.get("/logout", utilities.handleErrors(accountController.accountLogout));
 
+// Route for building update form
 router.get("/update/:account_id", utilities.checkLogin, accountController.buildUpdateForm);
 
+// Route to process and update account
 router.post("/update", accountValidate.updateAccountRules(), accountValidate.checkUpdateData, accountController.updateAccount);
 
+// Route to update and change password
 router.post("/change-password", accountValidate.passwordRules(), accountValidate.checkPasswordData, accountController.changePassword);
 
 module.exports = router;
