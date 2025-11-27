@@ -41,19 +41,4 @@
 
                 <p class="login-link">Already have an account? <a href="/account/login">Log in</a></p>
             </form>
-
-            <script>
-                const pswdBtn = document.querySelector("#pswdBtn");
-                pswdBtn.addEventListener("click", function () {
-                    const pswdInput = document.getElementById("account_password");
-                    const type = pswdInput.getAttribute("type");
-
-                    if (type === "password") {
-                        pswdInput.setAttribute("type", "text");
-                        pswdBtn.innerHTML = "Hide";
-                    } else {
-                        pswdInput.setAttribute("type", "password");
-                        pswdBtn.innerHTML = "Show";
-                    }
-                });
-            </script>
+            <script src=/js/toggle-password.js></script>
