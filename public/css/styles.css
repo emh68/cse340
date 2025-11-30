@@ -231,7 +231,6 @@ h2 {
   align-items: center;
   text-align: center;
   box-sizing: border-box;
-  pointer-events: none;
 }
 
 /* Text and button styles */
