@@ -370,35 +370,8 @@ h2 {
 .register-form button,
 .classification-form button,
 .account-update-form button,
-.change-account-password-form button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #abd4ff;
-  color: #001f41;
-  text-transform: uppercase;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 1rem 0;
-}
-
-.inventory-form button:disabled {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #ccc;
-  color: #545454;
-  text-transform: uppercase;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.7;
-  margin: 1rem 0;
-}
-
-.inventory-form button:enabled {
+.change-account-password-form button,
+.inventory-form button {
   width: 100%;
   padding: 0.75rem;
   background-color: #abd4ff;
