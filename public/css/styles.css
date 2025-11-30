@@ -327,6 +327,28 @@ h2 {
   color: #333;
 }
 
+.register-link a,
+.login-link a,
+.register-link a:visited,
+.login-link a:visited,
+.register-link a:hover,
+.login-link a:hover,
+.register-link a:active,
+.login-link a:active,
+.register-link a:focus,
+.login-link a:focus {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.register-link a:hover,
+.login-link a:hover,
+.register-link a:focus,
+.login-link a:focus {
+  color: #2feef5;
+  outline: none;
+}
+
 .login-form,
 .register-form,
 .inventory-form,
