@@ -468,6 +468,10 @@ nav ul li:hover {
   padding: 3px;
 }
 
+.accnt-mngmt-reviews {
+  list-style-type: none;
+}
+
 #classificationList {
   height: 2rem;
   padding: 5px 5px;

@@ -143,7 +143,6 @@ async function buildAccount(req, res) {
             errors: null,
             accountData,
             userReviews,
-            messages: req.flash("notice")
         });
     } catch (error) {
         console.error(error);

@@ -111,12 +111,12 @@ async function updateReview(req, res, next) {
 
         if (!errors.isEmpty()) {
             const nav = await utilities.getNav();
-            req.flash("notice", "Update failed. Please correct the errors.");
+            // req.flash("notice", "Update failed. Please correct the errors.");
             return res.status(400).render("review/edit-review", {
                 title: "Edit Review",
                 nav,
                 review_id: review_id,
-                review_text: review_text,
+                review_text: existing,
                 // errors: errors.array(),
                 errors: null
             });

@@ -2,12 +2,14 @@
     <%= title %>
 </h1>
 
-<!-- Greeting -->
-<h2>Welcome <%= accountData.account_firstname %>
-</h2>
-
 <!-- Display flash messages -->
-<%- messages %>
+<%- messages() %>
+
+    <!-- Greeting -->
+    <h2>Welcome <%= accountData.account_firstname %>
+    </h2>
+
+
 
     <!-- Update Account (all users) -->
     <p>
@@ -27,7 +29,7 @@
             <% if (userReviews && userReviews.length> 0) { %>
                 <ul>
                     <% userReviews.forEach(function(r, index) { %>
-                        <li>
+                        <li class="accnt-mngmt-reviews">
                             <%= index + 1 %>.
                                 Reviewed the <a href="/inv/detail/<%= r.inv_id %>"><%- r.inv_year %> <%- r.inv_make
                                             %><%- r.inv_model %></a> on <%= new Date(r.review_date).toLocaleDateString()
