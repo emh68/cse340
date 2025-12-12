@@ -1,10 +1,11 @@
 const { body, validationResult } = require('express-validator');
+const utilities = require('../utilities/');
+const validate = {}
 
-
-/*  *********************
-*  Classification Rules
+/*  *********************
+*  Classification Rules
 * *********************** */
-function classificationRules() {
+validate.classificationRules = () => {
     return [
         body('classification_name')
             .trim()
@@ -18,24 +19,24 @@ function classificationRules() {
 /* **************************
  * Check Classification Data
  * ************************* */
-function checkClassificationData(req, res, next) {
+validate.checkClassificationData = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        let nav = '';
-        if (req.app.locals.nav) nav = req.app.locals.nav;
+        let nav = await utilities.getNav();
         return res.status(400).render('inventory/add-classification', {
             title: 'Add Classification',
             nav,
             errors,
+            ...req.body
         });
     }
     next();
 }
 
-/*  *****************
-*  Inventory Rules
+/*  *****************
+*  Inventory Rules
 * ******************* */
-function inventoryRules() {
+validate.inventoryRules = () => {
     return [
         body('classification_id')
             .isInt({ min: 1 })
@@ -94,14 +95,10 @@ function inventoryRules() {
 /* **************************
  * Check Inventory Data
  * ************************* */
-async function checkInventoryData(req, res, next) {
+validate.checkInventoryData = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        let nav = '';
-        if (req.app.locals.nav) nav = req.app.locals.nav;
-
-        // Get the dropdown classification list again
-        const utilities = require(".");
+        let nav = await utilities.getNav();
         const classificationSelect = await utilities.buildClassificationList(req.body.classification_id);
 
         return res.status(400).render('inventory/add-inventory', {
@@ -115,10 +112,10 @@ async function checkInventoryData(req, res, next) {
     next();
 }
 
-/*  *****************************
-*  Update Inventory Rules
+/*  *****************************
+*  Update Inventory Rules
 * ****************************** */
-function updateRules() {
+validate.updateRules = () => {
     return [
         body('classification_id')
             .isInt({ min: 1 })
@@ -176,17 +173,14 @@ function updateRules() {
 
 
 /* ***********************************************************
-*  Check Update Data for edit/update process
-*  Redirects back to the edit-inventory view if errors exist
+*  Check Update Data for edit/update process
+*  Redirects back to the edit-inventory view if errors exist
 * *********************************************************** */
-async function checkUpdateData(req, res, next) {
+validate.checkUpdateData = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        let nav = '';
-        if (req.app.locals.nav) nav = req.app.locals.nav;
+        let nav = await utilities.getNav();
 
-        // Get the dropdown classification list
-        const utilities = require(".");
         const classificationList = await utilities.buildClassificationList(req.body.classification_id);
         const itemName = `${req.body.inv_make} ${req.body.inv_model}`;
         return res.status(400).render('inventory/edit-inventory', {
@@ -200,6 +194,4 @@ async function checkUpdateData(req, res, next) {
     next();
 }
 
-
-
-module.exports = { classificationRules, checkClassificationData, inventoryRules, checkInventoryData, updateRules, checkUpdateData };
+module.exports = validate;

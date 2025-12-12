@@ -90,7 +90,7 @@ nav ul li:hover {
   text-align: center;
 }
 
-h2 {
+.hero-overlay h2 {
   font-weight: 700;
   margin: auto;
   color: #0DB6D7;
@@ -354,9 +354,12 @@ h2 {
 .inventory-form,
 .classification-form,
 .account-update-form,
-.change-account-password-form {
-  max-width: 400px;
-  margin: 2rem auto;
+.change-account-password-form,
+.add-review-form,
+.edit-review-form,
+.delete-review-form {
+  max-width: 600px;
+  margin: .7rem;
   padding: 2rem;
   background-color: #001f41;
   border-radius: 8px;
@@ -368,7 +371,10 @@ h2 {
 .inventory-form label,
 .classification-form label,
 .account-update-form label,
-.change-account-password-form label {
+.change-account-password-form label,
+.add-review-form label,
+.edit-review-form label,
+.delete-review-form label {
   color: #fff;
   display: block;
   margin-bottom: 0.5rem;
@@ -379,7 +385,10 @@ h2 {
 .inventory-form input,
 .classification-form input,
 .account-update-form input,
-.change-account-password-form input {
+.change-account-password-form input,
+.add-review-form input,
+.edit-review-form input,
+.delete-review-form input {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -392,7 +401,10 @@ h2 {
 .classification-form button,
 .account-update-form button,
 .change-account-password-form button,
-.inventory-form button {
+.inventory-form button,
+.add-review-form button,
+.edit-review-form button,
+.delete-review-form button {
   width: 100%;
   padding: 0.75rem;
   background-color: #abd4ff;
@@ -502,7 +514,7 @@ h2 {
   border-bottom: 1px solid #ccc;
 }
 
-/* Action links styling */
+/* Links styling */
 #inventoryDisplay a {
   text-decoration: none;
   color: #0a0ef8;
@@ -531,6 +543,26 @@ select.dirty:valid {
   background-color: #ccffcc;
 }
 
+.reviews h2 {
+  color: #000;
+}
+
+.review-item {
+  padding: 10px;
+}
+
+.review-item hr {
+  border: solid #000 2px;
+  margin: 0;
+}
+
+.add-review-form textarea,
+.edit-review-form textarea,
+.delete-review-form textarea {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 4px;
+}
 
 /* Media Queries */
 

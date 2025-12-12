@@ -182,5 +182,4 @@ validate.checkPasswordData = async (req, res, next) => {
     next()
 }
 
-
 module.exports = validate

@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
+const reviewModel = require("../models/review-model")
 
 const invCont = {}
 
@@ -29,15 +30,17 @@ invCont.buildByClassificationId = async function (req, res, next) {
     }
 }
 
-
 /* ***************************
- *  Build inventory detail view
+ *  Build inventory detail view
  * ************************** */
 invCont.buildByInventoryId = async function (req, res, next) {
     try {
         const inv_id = req.params.invId
         const vehicleArray = await invModel.getInventoryById(inv_id)
         const vehicleData = vehicleArray[0]
+
+        // Fetch reviews for the vehicle
+        const reviews = await reviewModel.getReviewsByInvId(inv_id)
 
         if (!vehicleData) {
             return next({ status: 404, message: "Vehicle not found" })
@@ -46,16 +49,22 @@ invCont.buildByInventoryId = async function (req, res, next) {
         const detailHTML = await utilities.buildDetailView(vehicleData)
         const vehicleName = `${vehicleData.inv_make} ${vehicleData.inv_model}`
         const nav = await utilities.getNav()
+        const accountData = res.locals.accountData || null
 
         res.render("./inventory/detail", {
             title: vehicleName,
             nav,
-            detailHTML
+            detailHTML,
+            reviews,
+            errors: null,
+            accountData,
+            inv_id: vehicleData.inv_id
         })
     } catch (error) {
         next(error)
     }
 }
+
 
 /* ***************************
  * Build Inventory Management View

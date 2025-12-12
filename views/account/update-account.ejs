@@ -38,11 +38,6 @@
 
             <!-- Change Password Form -->
             <h2>Update Password</h2>
-
-            <p class="password-requirements">
-                Passwords must be at least 12 characters long and contain at least 1 number,
-                1 capital letter, and 1 special character.
-            </p>
             <p>*note your original password will be changed.</p>
 
             <form action="/account/change-password" method="post" class="change-account-password-form">
@@ -54,6 +49,10 @@
                         title="At least 12 characters, 1 number, 1 uppercase, and 1 special character">
                     <button type="button" id="pswdBtn" class="toggle-password">Show</button>
                 </div>
+                <p class="password-requirements">
+                    Passwords must be at least 12 characters long and contain at least 1 number,
+                    1 capital letter, and 1 special character.
+                </p>
 
                 <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
                 <button type="submit">Change Password</button>

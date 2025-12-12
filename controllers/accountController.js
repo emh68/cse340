@@ -2,6 +2,7 @@ const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const reviewModel = require("../models/review-model")
 require("dotenv").config()
 
 
@@ -131,11 +132,18 @@ async function buildAccount(req, res) {
         let nav = await utilities.getNav();
         const accountData = res.locals.accountData;
 
+        let userReviews = [];
+        if (accountData) {
+            userReviews = await reviewModel.getReviewsByAccountId(accountData.account_id);
+        }
+
         res.render("account/account-management", {
             title: "Account Management",
             nav,
             errors: null,
             accountData,
+            userReviews,
+            messages: req.flash("notice")
         });
     } catch (error) {
         console.error(error);

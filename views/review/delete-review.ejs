@@ -1,0 +1,36 @@
+<h1>
+    <%= title %>
+</h1>
+
+<!-- Flash messages -->
+<%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=> { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <% }) %>
+        </ul>
+        <% } %>
+
+            <p>CONFIRM DELETION - The delete is permanent and cannot be undone.</p>
+
+            <form action="/review/delete" method="POST" class="delete-review-form">
+                <label for="screen_name_display">Screen Name</label>
+                <input type="text" id="screen_name_display" value="<%= review.review_screen_name %>" readonly>
+
+                <label for="date_display">Review Date</label>
+                <input type="text" id="date_display" value="<%= new Date(review.review_date).toLocaleString() %>"
+                    readonly>
+
+                <label for="review_text">Review</label>
+                <textarea name="review_text" id="review_text" required rows="6"
+                    readonly><%= review.review_text %></textarea>
+
+                <input type="hidden" name="review_id" value="<%= review.review_id %>">
+                <input type="hidden" name="inv_id" value="<%= review.inv_id %>">
+                <input type="hidden" name="account_id" value="<%= review.account_id %>">
+                <button type="submit">Delete</button>
+            </form>
