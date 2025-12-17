@@ -21,8 +21,8 @@
                         <p>You must <a href="/account/login">login</a> to write a review.</p>
                         <% } else { %>
                             <form action="/review/add" method="POST" class="add-review-form">
-                                <label>Screen Name</label>
-                                <input type="text"
+                                <label for="review_screen_name">Screen Name</label>
+                                <input type="text" id="review_screen_name" name="review_screen_name"
                                     value="<%= (accountData.account_firstname ? accountData.account_firstname.charAt(0) : '') + (accountData.account_lastname || '') %>"
                                     readonly>
                                 <label for="review_text">Review</label>
